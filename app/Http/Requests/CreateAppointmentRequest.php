@@ -30,7 +30,7 @@ class CreateAppointmentRequest extends Request
             'end_time'=> 'required',
             'first_name'=> 'required',
             'last_name' => 'required',
-            //'comment' => 'required'  We don;t need a comment
+            ////'comment' => 'required'  We don;t need a comment
         ];
     }
 

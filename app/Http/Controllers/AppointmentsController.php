@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Appointment;
 use App\Http\Requests\CreateAppointmentRequest;
+//I had to add this because Larvel was not properly handling
+// parameter validation. So I have a rules that is empty.
+// I can add the error handling in the update api
+use App\Http\Requests\UpdateAppointmentRequest;
 
 class AppointmentsController extends Controller
 {
@@ -59,8 +63,9 @@ class AppointmentsController extends Controller
         //$id = $model['id'];
 
         //response()->json(['message' => 'Appointment added!','id'=>$id ],201);
+        // Look into putting a resource ID in the Location http header. 
         return response()->json(['message' => 'Appointment added!','id'=>$model['id']],201);
-
+        //return $request;
     }
 
     /**
@@ -100,9 +105,52 @@ class AppointmentsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(CreateAppointmentRequest $request,  $id)
     {
-        //
+
+        // Updates with postman is not quite working as expected lol
+        //http://laravel.io/forum/02-13-2014-i-can-not-get-inputs-from-a-putpatch-request
+
+        $appointment=Appointment::find($id);
+
+        if(!$appointment)
+        {
+            return response()->json(['message' => 'This appointent does not exist','code'=>404],404); 
+        }
+
+
+
+        //Storing a new value via post. 
+        $values = $request->only('start_time','end_time','first_name','last_name','comment');
+
+        // comment is not necessarily required.  If a comment is not there in the request
+        // we need to check that it is not NULL
+
+
+
+
+        if($values['comment']===NULL)
+        {
+            $values['comment']='';
+        }
+
+        $appointment->start_time = $values['start_time'];
+        $appointment->end_time = $values['end_time'];
+        $appointment->first_name = $values['first_name'];
+        $appointment->last_name = $values['last_name'];
+        $appointment->comment = $values['comment'];
+        
+        
+
+        $appointment->save();
+
+        //return $model['id'];
+        //$id = $model['id'];
+
+        //response()->json(['message' => 'Appointment added!','id'=>$id ],201);
+        // Look into putting a resource ID in the Location http header. 
+        return response()->json(['message' => 'Appointment Updated!','id'=>$appointment->id],200);
+
     }
 
     /**
@@ -113,6 +161,16 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $appointment=Appointment::find($id);
+
+        if(!$appointment)
+        {
+            return response()->json(['message' => 'This appointent does not exist','code'=>404],404); 
+        }
+
+        $appointment->delete();
+
+        return response()->json(['message' => 'This appointent has been deleted','code'=>200],200); 
+
     }
 }
