@@ -7,7 +7,9 @@ class Appointment extends Model
 	protected $table = 'Appointments';
 
 	protected $fillable = ['start_time', 'end_time','first_name', 'last_name','comment'];
-	protected $hidden = ['id','created_at','updated_at'];
+	//protected $hidden = ['id','created_at','updated_at'];
+	// For whatever reason I want to see the ID along with the data. 
+	protected $hidden = ['created_at','updated_at'];
 
 
 }

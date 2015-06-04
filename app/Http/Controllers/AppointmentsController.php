@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Appointment;
 
 class AppointmentsController extends Controller
 {
@@ -14,7 +15,11 @@ class AppointmentsController extends Controller
     public function index()
     {
         //
-        return 'I\'m in index';
+        //return 'I\'m in index';
+
+        // Go to the Appointment model and get all the data!
+        $appointments = Appointment::all();
+        return response()->json(['appointments' => $appointments],200);
 
     }
 
@@ -47,7 +52,15 @@ class AppointmentsController extends Controller
     public function show($id)
     {
         //
-        return 'I\'m in index'.$id;
+        //return 'I\'m in index'.$id;
+        $appointment = Appointment::find($id);
+
+        if(!$appointment)
+        {
+            return response()->json(['message' => 'This appointent does not exist','code'=>404],404); 
+        }
+
+        return response()->json(['appointment' => $appointment],200);
     }
 
     /**
