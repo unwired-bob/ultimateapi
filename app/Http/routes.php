@@ -11,4 +11,8 @@
 |
 */
 
-Route::get('/{name?}', 'MyController@index');
+// This was  test to see if I could create a fake route for a webpage
+//Route::get('/{name?}', 'MyController@index');
+
+Route::resource('appointments','AppointmentsController',['except'=>['create','edit']]);
+
