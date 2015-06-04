@@ -14,5 +14,8 @@
 // This was  test to see if I could create a fake route for a webpage
 //Route::get('/{name?}', 'MyController@index');
 
-Route::resource('appointments','AppointmentsController',['except'=>['create','edit']]);
+Route::group(array('prefix' => 'api/v1'),function()
+{
+	Route::resource('appointments','AppointmentsController',['except'=>['create','edit']]);
+});
 
