@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b9f294bf06252b480bdba07c678d5ea",
+    "hash": "0c36ff8b94445e970165792ed9f4872c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1803,16 +1803,16 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+                "reference": "2cfecfe1dbc32cfec713db5c83c78c2ecc66c6dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2cfecfe1dbc32cfec713db5c83c78c2ecc66c6dc",
+                "reference": "2cfecfe1dbc32cfec713db5c83c78c2ecc66c6dc",
                 "shasum": ""
             },
             "require": {
@@ -1828,7 +1828,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -1851,7 +1851,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-05-29 06:29:14"
+            "time": "2015-05-31 18:44:10"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -2980,7 +2980,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "fzaninotto/faker": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

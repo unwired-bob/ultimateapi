@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\Appointment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,9 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       
+       // There are no foreign relationships but set it here anyways
+       //DB::statement('SET_FOREIGN_KEY_CHECKS = 0');
+        Appointment::truncate();
         Model::unguard();
 
         // $this->call('UserTableSeeder');
+
+        $this->call('AppointmentsSeed');
 
         Model::reguard();
     }
