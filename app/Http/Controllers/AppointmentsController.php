@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Appointment;
+use App\Http\Requests\CreateAppointmentRequest;
 
 class AppointmentsController extends Controller
 {
@@ -38,9 +39,28 @@ class AppointmentsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(CreateAppointmentRequest $request)
     {
-        //
+        //Storing a new value via post. 
+        $values = $request->only('start_time','end_time','first_name','last_name','comment');
+
+        // comment is not necessarily required.  If a comment is not there in the request
+        // we need to check that it is not NULL
+
+        if($values['comment']===NULL)
+        {
+            $values['comment']='';
+        }
+
+        // print the values so Postman can see it... return $values;
+        $model = Appointment::create($values);
+
+        //return $model['id'];
+        //$id = $model['id'];
+
+        //response()->json(['message' => 'Appointment added!','id'=>$id ],201);
+        return response()->json(['message' => 'Appointment added!','id'=>$model['id']],201);
+
     }
 
     /**
